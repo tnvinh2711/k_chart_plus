@@ -17,7 +17,7 @@ class NumberUtil {
   }
 
   static int getDecimalLength(double b) {
-    String s = b.toString();
+    String s = b.customToStringAsFixed(20);
     int dotIndex = s.indexOf(".");
     if (dotIndex < 0) {
       return 0;
@@ -43,3 +43,31 @@ class NumberUtil {
     }
   }
 }
+
+extension SmallNumberExtension on num {
+  /// convert mini number, like a 1.2345e-7 to 0.00000012345
+  String customToStringAsFixed(int fractionDigits) {
+    if (fractionDigits <= 20) {
+      final value = toStringAsFixed(fractionDigits);
+      if (num.tryParse(value) == 0 && this != 0) {
+        return (1 / pow(10, fractionDigits))
+            .customToStringAsFixed(fractionDigits);
+      }
+      return toStringAsFixed(fractionDigits);
+    }
+
+    String result = toStringAsFixed(20);
+    int decimalIndex = result.indexOf('.');
+    if (decimalIndex == -1) {
+      return '$result.${'0' * fractionDigits}';
+    }
+
+    int currentFractionDigits = result.length - decimalIndex - 1;
+    if (currentFractionDigits >= fractionDigits) {
+      return result;
+    }
+
+    return result + '0' * (fractionDigits - currentFractionDigits);
+  }
+}
+
