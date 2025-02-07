@@ -1,6 +1,5 @@
 import 'dart:async' show StreamSink;
 import 'package:flutter/material.dart';
-import 'package:k_chart_plus/utils/number_util.dart';
 import '../entity/info_window_entity.dart';
 import '../entity/k_line_entity.dart';
 import '../utils/date_format_util.dart';
@@ -105,11 +104,6 @@ class ChartPainter extends BaseChartPainter {
 
   @override
   void initChartRenderer() {
-    if (datas != null && datas!.isNotEmpty) {
-      var t = datas![0];
-      fixedLength =
-          NumberUtil.getMaxDecimalLength(t.open, t.close, t.high, t.low);
-    }
     mMainRenderer = MainRenderer(
       mMainRect,
       mMainMaxValue,
