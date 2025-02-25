@@ -340,7 +340,7 @@ class DepthChartPainter extends CustomPainter {
       chartTranslations: this.chartTranslations,
       chartColors: this.chartColors,
       price: NumberUtil.format(entity.price, length: fixedLength!),
-      amount: NumberUtil.format(entity.vol, length: fixedLength!),
+      amount: NumberUtil.format(entity.vol, length: 2),
     );
     dx = dx < mDrawWidth ? dx + offset.dx : dx - offset.dx - popupPainter.width;
     dy = dy < mDrawHeight / 2

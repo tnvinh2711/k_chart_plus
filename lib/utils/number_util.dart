@@ -4,15 +4,15 @@ class NumberUtil {
   static String format(double n, {int? length}) {
     if (n >= 1000000000) {
       n /= 1000000000;
-      return "${n.customToStringAsFixed(2)}B";
+      return "${n.toStringAsFixed(2)}B";
     } else if (n >= 1000000) {
       n /= 1000000;
-      return "${n.customToStringAsFixed(2)}M";
+      return "${n.toStringAsFixed(2)}M";
     } else if (n >= 10000) {
       n /= 1000;
-      return "${n.customToStringAsFixed(2)}K";
+      return "${n.toStringAsFixed(2)}K";
     } else {
-      return n.customToStringAsFixed(getDecimalLength(n));
+      return n.toStringAsFixed(length ?? 4);
     }
   }
 
